@@ -1,0 +1,46 @@
+{
+  "name": "angular2-node-express-webpack",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack --progress",
+    "build:prod": "webpack -p --progress",
+    "postinstall": "typings install",
+    "start": "concurrently \"webpack --watch --colors\" \"nodemon server/main.js\""
+  },
+  "dependencies": {
+    "@angular/common": "2.0.0-rc.6",
+    "@angular/compiler": "2.0.0-rc.6",
+    "@angular/compiler-cli": "0.6.0",
+    "@angular/core": "2.0.0-rc.6",
+    "@angular/forms": "2.0.0-rc.6",
+    "@angular/http": "2.0.0-rc.6",
+    "@angular/platform-browser": "2.0.0-rc.6",
+    "@angular/platform-browser-dynamic": "2.0.0-rc.6",
+    "@angular/router": "3.0.0-rc.2",
+    "@angular/upgrade": "2.0.0-rc.6",
+    "core-js": "^2.4.1",
+    "reflect-metadata": "^0.1.3",
+    "rxjs": "5.0.0-beta.11",
+    "systemjs": "0.19.27",
+    "zone.js": "^0.6.17",
+    "angular2-in-memory-web-api": "0.0.18",
+    "bootstrap": "^3.3.6",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "font-awesome": "^4.6.3",
+    "jquery": "^2.2.4",
+    "morgan": "^1.7.0"
+  },
+  "devDependencies": {
+    "concurrently": "^2.2.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "html-webpack-plugin": "^2.22.0",
+    "nodemon": "^1.10.2",
+    "ts-loader": "^0.8.2",
+    "raw-loader": "0.5.1",
+    "typescript": "^2.0.2",
+    "typings": "^1.3.2",
+    "webpack": "^1.13.2"
+  }
+}
