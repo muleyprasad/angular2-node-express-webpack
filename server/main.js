@@ -1,6 +1,7 @@
 var express = require('express');
 var morgan = require('morgan'); 
 var bodyParser = require('body-parser');
+var path = require("path");
 
 var app = express();
 app.set('port', (process.env.PORT || 3000));
@@ -14,8 +15,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(morgan('dev'));
 
-app.get('/', function(req, res) {
-    res.sendFile(__dirname + '/../dist/index.html');
+app.use(function (req, res, next) {
+    if (path.extname(req.path).length > 0) {
+        // normal static file request
+        next();
+    }
+    else {
+        // redirect all html requests to `index.html`
+        res.sendFile(path.resolve(__dirname + '/../dist/index.html'));
+    }
 });
 
 app.listen(app.get('port'), function() {
