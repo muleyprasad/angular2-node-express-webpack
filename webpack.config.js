@@ -1,24 +1,40 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var path = require('path');
 
 module.exports = {
 
   entry: './client/main.ts',
   output: {
-    path: './dist',
+    publicPath: '',
+    path: path.resolve(__dirname, './dist'),
     filename: 'app.bundle.js'
   },
   module: {
     loaders: [
-      {test: /\.ts$/, loader: 'ts'},
-      {test: /\.html$/, loader: 'raw'},
-      {test: /\.css$/, loader: 'raw'}
+      // .ts files for TypeScript
+      {
+        test: /\.ts$/,
+        loaders: [
+          'awesome-typescript-loader?{tsconfig: "tsconfig.json"}'
+        ]
+      },
+      { test: /\.css$/, loaders: ['to-string-loader', 'css-loader'] },
+      { test: /\.html$/, loader: 'raw-loader' }
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.ts', '.html', '.css']
+    extensions: ['.js', '.ts', '.html', '.css']
   },
   plugins: [
+    new webpack.ContextReplacementPlugin(
+      // The (\\|\/) piece accounts for path separators in *nix and Windows
+      /angular(\\|\/)core(\\|\/)@angular/,
+      path.resolve(__dirname, '../client'),
+      {
+        // your Angular Async Route paths relative to this root directory
+      }
+    ),
     new HtmlWebpackPlugin({
       template: './client/index.html'
     }),
